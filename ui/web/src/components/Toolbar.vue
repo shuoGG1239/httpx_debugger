@@ -75,7 +75,7 @@ function exportHar(): void {
       v-model="store.filter"
       class="filter"
       type="text"
-      placeholder="过滤：host / url / 方法 / 状态码"
+      placeholder="过滤：(GET OR POST) AND 200 / host 关键词"
       spellcheck="false"
     />
     <span class="sep" />
@@ -119,8 +119,12 @@ function exportHar(): void {
 .btn.primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #0b0e11;
+  color: #fff;
   font-weight: 600;
+}
+.btn.primary:hover:not(:disabled) {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
 }
 .btn.primary.active {
   background: var(--danger);

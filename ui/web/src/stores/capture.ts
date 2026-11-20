@@ -8,6 +8,7 @@ import type {
   Session,
   Status,
 } from '@/types'
+import { sessionMatches } from '@/utils/filter'
 
 const MAX_SESSIONS = 5000
 
@@ -31,17 +32,9 @@ export const useCaptureStore = defineStore('capture', {
       return state.sessions.find((s) => s.id === state.selectedId) ?? null
     },
     filtered(state): Session[] {
-      const q = state.filter.trim().toLowerCase()
+      const q = state.filter.trim()
       if (!q) return state.sessions
-      return state.sessions.filter(
-        (s) =>
-          s.method.toLowerCase().includes(q) ||
-          s.host.toLowerCase().includes(q) ||
-          s.url.toLowerCase().includes(q) ||
-          String(s.status).includes(q) ||
-          s.scheme.toLowerCase().includes(q) ||
-          (s.error ?? '').toLowerCase().includes(q),
-      )
+      return state.sessions.filter((s) => sessionMatches(s, q))
     },
     sessionCount(state): number {
       return state.sessions.length

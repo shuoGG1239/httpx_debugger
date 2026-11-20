@@ -300,7 +300,11 @@ function buildPayload(): ModifiedRequest | ModifiedResponse | undefined {
 .btn.primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #0b0e11;
+  color: #fff;
   font-weight: 600;
+}
+.btn.primary:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
 }
 </style>

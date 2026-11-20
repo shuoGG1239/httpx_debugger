@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const left = ref(46) // 左栏宽度百分比
+// 拖拽比例持久化到 localStorage（组件在无右栏/有右栏切换时重建也能恢复）
+const saved = Number(localStorage.getItem('httpx-split-left') ?? 46)
+const left = ref(Number.isFinite(saved) && saved >= 18 && saved <= 80 ? saved : 46)
 const dragging = ref(false)
 
 let onMove: ((e: MouseEvent) => void) | null = null
@@ -15,6 +17,7 @@ function startDrag(e: MouseEvent): void {
   onMove = (ev: MouseEvent) => {
     const pct = ((ev.clientX - rect.left) / rect.width) * 100
     left.value = Math.min(80, Math.max(18, pct))
+    localStorage.setItem('httpx-split-left', String(left.value))
   }
   onUp = () => {
     dragging.value = false
@@ -30,11 +33,11 @@ function startDrag(e: MouseEvent): void {
 
 <template>
   <div class="split" :class="{ dragging }">
-    <section class="pane left" :style="{ width: left + '%' }">
+    <section class="pane left" :style="{ width: $slots.right ? left + '%' : '100%' }">
       <slot name="left" />
     </section>
-    <div class="divider" @mousedown="startDrag" />
-    <section class="pane right">
+    <div v-if="$slots.right" class="divider" @mousedown="startDrag" />
+    <section v-if="$slots.right" class="pane right">
       <slot name="right" />
     </section>
   </div>

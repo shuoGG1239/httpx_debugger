@@ -9,7 +9,8 @@
   --border-faint: #20262e;
   --fg: #d8dee6;
   --fg-dim: #8b96a3;
-  --accent: #4fc3f7;
+  --accent: #0d6efd;
+  --accent-strong: #0b5ed7;
   --ok: #4caf50;
   --warn: #ffb74d;
   --danger: #e5534b;
@@ -57,4 +58,15 @@ body {
 }
 ::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+/* 详情侧边栏滑入 */
+.slide-enter-active {
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease;
+}
+.slide-enter-from {
+  transform: translateX(18px);
+  opacity: 0;
 }

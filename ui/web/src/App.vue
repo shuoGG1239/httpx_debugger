@@ -44,7 +44,9 @@ function resolveIntercept(action: 'continue' | 'drop', payload?: unknown): void 
     <Toolbar />
     <SplitPane>
       <template #left><SessionTable /></template>
-      <template #right><DetailPane /></template>
+      <template v-if="store.selected" #right>
+        <Transition name="slide"><DetailPane /></Transition>
+      </template>
     </SplitPane>
     <InterceptModal v-if="store.interceptQueue.length > 0" :entry="store.interceptQueue[0]" @resolve="resolveIntercept" />
   </div>
