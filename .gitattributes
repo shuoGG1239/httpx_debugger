@@ -1,0 +1,15 @@
+# 项目统一：所有文本文件 LF 行尾（禁止 CRLF），UTF-8 编码。
+* text eol=lf
+
+# 二进制文件不做行尾转换
+*.exe binary
+*.dll binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary

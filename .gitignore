@@ -1,0 +1,19 @@
+# Node / Electron
+node_modules/
+ui/out/
+ui/dist/
+*.tsbuildinfo
+
+# Go
+core/httpx-core.exe
+core/data/
+*.exe
+
+# 临时产物
+tmp/
+*.log
+
+# IDE
+.idea/
+.vscode/
+.DS_Store
